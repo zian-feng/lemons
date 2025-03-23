@@ -1,9 +1,10 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown, ChevronUp } from "lucide-react"
 import { format, subDays, eachDayOfInterval } from "date-fns"
+import { useSound } from "use-sound"
 import Image from "next/image"
 
 // Define types for our lemon data
@@ -28,42 +29,6 @@ export default function LemonCounter() {
   const [showStats, setShowStats] = useState(false)
   const [showAlert, setShowAlert] = useState(true)
 
-  // Use a ref for the audio element
-  const audioRef = useRef<HTMLAudioElement | null>(null)
-
-  // Initialize audio on component mount
-  useEffect(() => {
-    // Create audio element
-    audioRef.current = new Audio("/sounds/lemonclick.wav")
-
-    // Preload the audio
-    if (audioRef.current) {
-      audioRef.current.preload = "auto"
-      audioRef.current.load()
-    }
-
-    // Cleanup on unmount
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause()
-        audioRef.current = null
-      }
-    }
-  }, [])
-
-  // Function to play sound
-  const playSound = () => {
-    if (audioRef.current) {
-      // Reset the audio to the beginning if it's already playing
-      audioRef.current.currentTime = 0
-
-      // Play the sound
-      audioRef.current.play().catch((error) => {
-        console.error("Error playing sound:", error)
-      })
-    }
-  }
-
   // Reset showAlert when stock changes
   useEffect(() => {
     if (data.stock <= 3) {
@@ -74,6 +39,9 @@ export default function LemonCounter() {
       return () => clearTimeout(timer)
     }
   }, [data.stock])
+
+  // Sound effect for both buttons
+  const [playLemonClick] = useSound("/sounds/lemonclick.wav")
 
   // Load data from localStorage on component mount
   useEffect(() => {
@@ -90,8 +58,7 @@ export default function LemonCounter() {
 
   // Function to add a lemon to stock
   const addLemon = () => {
-    playSound()
-
+    playLemonClick()
     setData((prev) => ({
       ...prev,
       stock: prev.stock + 1,
@@ -103,7 +70,7 @@ export default function LemonCounter() {
   const consumeLemon = () => {
     if (data.stock <= 0) return
 
-    playSound()
+    playLemonClick()
 
     const today = format(new Date(), "yyyy-MM-dd")
     const dailyConsumption = { ...data.dailyConsumption }
@@ -169,9 +136,6 @@ export default function LemonCounter() {
 
   return (
     <div className="space-y-6">
-      {/* Hidden audio element as fallback */}
-      <audio id="lemonClickSound" src="/sounds/lemonclick.wav" preload="auto" className="hidden" />
-
       {/* Stock Display with Alert */}
       <div className="text-center relative">
         <div className="flex items-center justify-center">
