@@ -140,7 +140,7 @@ export default function LemonCounter() {
       <div className="text-center relative">
         <div className="flex items-center justify-center">
           <motion.div
-            className="text-6xl font-bold text-yellow-500 mb-2"
+            className="text-6xl font-bold text-yellow-900 mb-2"
             key={data.stock}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -153,7 +153,7 @@ export default function LemonCounter() {
           <AnimatePresence>
             {data.stock <= 3 && showAlert && (
               <motion.div
-                className="absolute top-0 right-0 ml-2 text-xs font-bold text-red-500"
+                className="absolute top-0 right-0 ml-2 text-xs font-bold text-red-600"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{
                   opacity: 1,
@@ -173,7 +173,7 @@ export default function LemonCounter() {
             )}
           </AnimatePresence>
         </div>
-        <p className="text-xl text-yellow-700">Lemons in Stock</p>
+        <p className="text-xl text-yellow-900">Lemons in Stock</p>
       </div>
 
       {/* Action Buttons */}
@@ -209,7 +209,7 @@ export default function LemonCounter() {
       <div className="flex justify-center mt-8">
         <button
           onClick={() => setShowStats(!showStats)}
-          className="flex items-center gap-1 text-sm text-yellow-600 hover:text-yellow-800 transition-colors"
+          className="flex items-center gap-1 text-sm text-yellow-900 hover:text-yellow-950 transition-colors"
         >
           {showStats ? (
             <>
@@ -237,8 +237,8 @@ export default function LemonCounter() {
               {/* GitHub-style Contribution Calendar */}
               <div className="space-y-1">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-xs font-medium text-yellow-700">Last 14 Days</h3>
-                  <p className="text-xs text-yellow-600">{getRecentConsumption().toFixed(1)} lemons consumed</p>
+                  <h3 className="text-xs font-medium text-yellow-800">Last 14 Days</h3>
+                  <p className="text-xs text-yellow-700">{getRecentConsumption().toFixed(1)} lemons consumed</p>
                 </div>
 
                 <div className="contribution-calendar">
@@ -251,7 +251,7 @@ export default function LemonCounter() {
                   ))}
                 </div>
 
-                <div className="flex justify-between text-xs text-yellow-600">
+                <div className="flex justify-between text-xs text-yellow-700">
                   <span>{format(getLast14Days()[0], "MMM d")}</span>
                   <span>{format(getLast14Days()[13], "MMM d")}</span>
                 </div>
@@ -260,16 +260,16 @@ export default function LemonCounter() {
               {/* Compact Stats */}
               <div className="grid grid-cols-2 gap-2 mt-2">
                 <div className="bg-yellow-100/50 p-1.5 rounded text-center">
-                  <p className="text-xs text-yellow-700">Total Purchased</p>
-                  <p className="text-base font-bold text-yellow-600">{data.purchased}</p>
+                  <p className="text-xs text-yellow-800">Total Purchased</p>
+                  <p className="text-base font-bold text-yellow-700">{data.purchased}</p>
                 </div>
                 <div className="bg-yellow-100/50 p-1.5 rounded text-center">
-                  <p className="text-xs text-yellow-700">Total Consumed</p>
-                  <p className="text-base font-bold text-yellow-600">{data.consumed}</p>
+                  <p className="text-xs text-yellow-800">Total Consumed</p>
+                  <p className="text-base font-bold text-yellow-700">{data.consumed}</p>
                 </div>
               </div>
 
-              <div className="text-xs text-center text-yellow-600 mt-1">
+              <div className="text-xs text-center text-yellow-700 mt-1">
                 {data.consumed > 0 ? (
                   <p>
                     Average: {(data.consumed / Math.max(Object.keys(data.dailyConsumption).length, 1)).toFixed(1)}{" "}
