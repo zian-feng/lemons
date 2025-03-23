@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 60 100% 98%;
+  --foreground: 60 10% 10%;
+
+  --card: 60 100% 100%;
+  --card-foreground: 60 10% 10%;
+
+  --popover: 60 100% 100%;
+  --popover-foreground: 60 10% 10%;
+
+  --primary: 54 100% 50%;
+  --primary-foreground: 60 10% 10%;
+
+  --secondary: 60 70% 95%;
+  --secondary-foreground: 60 10% 10%;
+
+  --muted: 60 70% 95%;
+  --muted-foreground: 60 10% 40%;
+
+  --accent: 60 70% 95%;
+  --accent-foreground: 60 10% 10%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 60 10% 90%;
+  --input: 60 10% 90%;
+  --ring: 54 100% 50%;
+
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 60 10% 10%;
+  --foreground: 60 10% 98%;
+
+  --card: 60 10% 15%;
+  --card-foreground: 60 10% 98%;
+
+  --popover: 60 10% 15%;
+  --popover-foreground: 60 10% 98%;
+
+  --primary: 54 100% 50%;
+  --primary-foreground: 60 10% 10%;
+
+  --secondary: 60 10% 20%;
+  --secondary-foreground: 60 10% 98%;
+
+  --muted: 60 10% 20%;
+  --muted-foreground: 60 10% 60%;
+
+  --accent: 60 10% 20%;
+  --accent-foreground: 60 10% 98%;
+
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 60 10% 20%;
+  --input: 60 10% 20%;
+  --ring: 54 100% 50%;
+}
+
+/* Grain texture */
+.grain-texture {
+  position: relative;
+}
+
+.grain-texture::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* GitHub-style contribution calendar */
+.contribution-calendar {
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);
+  gap: 2px;
+}
+
+.contribution-day {
+  aspect-ratio: 1 / 1;
+  border-radius: 2px;
+  transition: transform 0.2s ease;
+}
+
+.contribution-day:hover {
+  transform: scale(1.2);
+}
+
+.contribution-level-0 {
+  background-color: #ebedf0;
+}
+
+.contribution-level-1 {
+  background-color: #ffeeaa;
+}
+
+.contribution-level-2 {
+  background-color: #ffdd56;
+}
+
+.contribution-level-3 {
+  background-color: #ffc107;
+}
+
+.contribution-level-4 {
+  background-color: #ff9800;
+}
+
+/* iOS Safari specific optimizations */
+@supports (-webkit-touch-callout: none) {
+  body {
+    /* Prevent elastic scrolling */
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Prevent text selection */
+  .no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Fix for iOS Safari 100vh issue */
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Gradient backgrounds */
+.lemon-gradient {
+  background: linear-gradient(135deg, #fff9c4 0%, #ffee58 100%);
+}
+
+.lemon-gradient-subtle {
+  background: linear-gradient(135deg, rgba(255, 249, 196, 0.5) 0%, rgba(255, 238, 88, 0.2) 100%);
+}
+
